@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Discover opportunities · TenderBridge</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+:root{color-scheme:light;--navy:#12304A;--blue:#2F6F9F;--bg:#F5F7FA;--card:#fff;--line:#DDE3EA;--text:#1F2937;--mute:#6B7280;--ok:#15803D;--warn:#D97706;--bad:#DC2626;--tint:#EAF1F7;--okbg:#E8F5EC;--warnbg:#FDF1E1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font:400 14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:12px 20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;color:var(--navy);letter-spacing:-.02em}
+.mark{width:40px;height:40px;border-radius:10px;background:#12304A;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800}
+.sp{flex:1}.icon-btn{position:relative;width:40px;height:40px;border:1px solid var(--line);background:var(--card);border-radius:8px;cursor:pointer;display:grid;place-items:center}
+.badge-n{position:absolute;top:-5px;right:-5px;background:var(--bad);color:#fff;border-radius:99px;font-size:10px;font-weight:700;padding:1px 5px}
+.menu{display:none}
+.shell{display:block}
+.side{display:flex;align-items:center;gap:4px}
+.side h6{display:none}
+.side a{padding:8px 11px;border-radius:0;color:var(--mute);text-decoration:none;font-weight:500;font-size:13.5px;border-bottom:2px solid transparent;white-space:nowrap}
+.side a:hover{color:var(--navy)}.side a[aria-current]{color:var(--blue);font-weight:600;border-bottom-color:var(--blue)}
+.side .future{display:flex;margin:0 0 0 8px;padding-left:12px;border-left:1px solid var(--line)}
+.side .future a{opacity:.6}
+.nav-wrap{flex:1;overflow:hidden}
+main{padding:28px 32px 56px;max-width:1240px;margin:0 auto;width:100%}
+.eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--mute);margin:0 0 6px}
+h1{font-size:34px;line-height:1.1;letter-spacing:-.03em;margin:0 0 8px;color:var(--navy);font-weight:800}
+.lead{color:var(--mute);margin:0 0 22px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.f{grid-column:span 3;min-width:0}.f.w{grid-column:span 6}
+label{display:block;font-weight:600;font-size:13px;color:var(--navy);margin-bottom:6px}
+select,input[type=search]{width:100%;height:42px;padding:0 12px;background:var(--card);border:1px solid var(--line);border-radius:8px;font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0 0}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--tint);color:var(--blue);border:0;border-radius:99px;padding:4px 6px 4px 12px;font-weight:600;font-size:12px;cursor:pointer}
+.chip b{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:13px;line-height:1}
+.chip:hover b{background:var(--blue);color:var(--card)}
+.bar{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px;gap:10px;flex-wrap:wrap}
+.count{font-weight:600;color:var(--navy)}
+.btn{height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--card);font-weight:600;cursor:pointer;color:var(--navy);display:inline-flex;align-items:center;justify-content:center;text-decoration:none;gap:6px}
+.btn:hover{border-color:var(--blue)}.btn.p{background:var(--navy);border-color:var(--navy);color:#fff}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--navy)}
+.tag.g{background:var(--tint);color:var(--blue);border-color:transparent}.tag.pr{background:var(--okbg);color:var(--ok);border-color:transparent}
+.card h3{margin:0;font-size:18px;line-height:1.3;color:var(--navy);letter-spacing:-.01em}
+.org{color:var(--mute);font-weight:500}
+.desc{margin:0;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;border-top:1px solid var(--line);padding-top:12px}
+.meta small{display:block;font-size:11px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.meta span{font-weight:600}.soon{color:var(--warn)}
+.foot{display:flex;gap:8px;align-items:center;margin-top:auto}.foot .btn.p{flex:1}
+.save[aria-pressed=true]{background:var(--tint);color:var(--blue);border-color:var(--blue)}
+.state{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:48px 20px;text-align:center}
+.state .ic{width:52px;height:52px;margin:0 auto 14px;border:1px solid var(--line);border-radius:12px;display:grid;place-items:center;background:var(--tint);font-size:22px}
+.state h2{margin:0 0 6px;font-size:18px;color:var(--navy)}.state p{margin:0 0 16px;color:var(--mute)}
+.sk{height:250px;background:linear-gradient(90deg,var(--line),var(--bg),var(--line));background-size:200% 100%;border-radius:12px;animation:sh 1.4s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.sk{animation:none}}
+.scrim{display:none}
+@media (max-width:1000px){.f,.f.w{grid-column:span 6}}
+@media (max-width:860px){
+ .menu{display:grid}.nav-wrap{flex:0}
+ .side{position:fixed;left:0;top:0;bottom:0;z-index:30;width:260px;flex-direction:column;align-items:stretch;background:var(--card);border-right:1px solid var(--line);transform:translateX(-100%);transition:transform .2s;padding:calc(20px + env(safe-area-inset-top,0px)) 12px 20px}
+ .side h6{display:block}.side a{border-bottom:0;border-radius:8px;padding:9px 12px}.side a[aria-current]{background:var(--tint)}
+ .side .future{flex-direction:column;margin:16px 0 0;padding:12px 0 0;border-left:0;border-top:1px solid var(--line)}
+ .side.open{transform:none}.scrim.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:25}
+ main{padding:20px 16px 48px}h1{font-size:28px}.cards{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.f,.f.w{grid-column:span 12}.panel{padding:16px}.top{padding:10px 14px}.logo span.n{font-size:17px}}
+</style>
+<style>html.embed .top{display:none!important}html.embed main{padding-top:4px!important}</style><script>if(/[?&]embed=/.test(location.search))document.documentElement.classList.add("embed")</script></head>
+<body>
+<header class="top">
+  <button class="icon-btn menu" id="menu" aria-label="Open navigation" aria-expanded="false">☰</button>
+  <div class="logo"><div class="mark">TB</div><span class="n">TenderBridge</span></div>
+  <div class="nav-wrap">
+  <nav class="side" id="side" aria-label="Business navigation">
+    <h6>Business</h6>
+    <a href="#">Overview</a><a href="#" aria-current="page">Discover opportunities</a><a href="#">Business profile</a><a href="#">Documents</a><a href="#">Certifications</a><a href="#">Notifications</a><a href="#">Account</a>
+    <div class="future"><h6>Other modules</h6><a href="#" style="color:var(--mute)">Applications</a><a href="#" style="color:var(--mute)">Saved opportunities</a><a href="#" style="color:var(--mute)">JV partners</a></div>
+  </nav>
+  </div>
+  <div class="sp"></div>
+  <button class="icon-btn" aria-label="Notifications, 3 unread">🔔<span class="badge-n">3</span></button>
+  <div class="mark" style="width:36px;height:36px;border-radius:50%" title="Account">AK</div>
+</header>
+<div class="shell">
+  <div class="scrim" id="scrim"></div>
+  <main>
+    <p class="eyebrow">Business workspace</p>
+    <h1>Discover opportunities</h1>
+    <p class="lead">Search government and private procurement listings, then narrow them by category, location, value and deadline.</p>
+    <section class="panel" aria-label="Search and filters">
+      <div class="grid">
+        <div class="f w"><label for="search">Search</label><input id="search" type="search" placeholder="Title, organization, category, location or keyword"></div>
+        <div class="f"><label for="type">Procurement type</label><select id="type"></select></div>
+        <div class="f"><label for="source">Source</label><select id="source"></select></div>
+        <div class="f"><label for="category">Category</label><select id="category"></select></div>
+        <div class="f"><label for="location">Location</label><select id="location"></select></div>
+        <div class="f"><label for="value">Estimated value</label><select id="value"></select></div>
+        <div class="f"><label for="deadline">Deadline</label><select id="deadline"></select></div>
+        <div class="f"><label for="posted">Posted date</label><select id="posted"></select></div>
+      </div>
+      <div class="chips" id="chips" aria-label="Active filters"></div>
+    </section>
+    <div class="bar">
+      <div class="count" id="count" role="status" aria-live="polite"></div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="btn" id="clear">Clear filters</button>
+        <label for="sort" style="margin:0" class="sr">Sort by</label>
+        <select id="sort" style="width:auto"></select>
+      </div>
+    </div>
+    <div id="out"></div>
+  </main>
+</div>
+<script>
+const TODAY=new Date("2026-10-06");
+const d=n=>{const x=new Date(TODAY);x.setDate(x.getDate()+n);return x.toISOString().slice(0,10)};
+// --- service layer (swap with Supabase later) ---
+const opportunityService={
+ async list(){
+  await new Promise(r=>setTimeout(r,700));
+  if(new URLSearchParams(location.search).get("error")==="1"&&!window.__retried)throw new Error("Could not reach the opportunities service.");
+  return DATA;
+ }};
+const C={computers:"Computers & IT",textile:"Textile",furniture:"Furniture",electrical:"Electrical",medical:"Medical",construction:"Construction",office:"Office Supplies",manufacturing:"Manufacturing",services:"Services",other:"Other"};
+const T={tender:"Tender",rfq:"RFQ",rfp:"RFP",vendor:"Vendor Request",supplier:"Supplier Procurement"};
+const DATA=[
+ ["Supply of Computer Systems and Accessories","tender","gov","Tamil Nadu e-Governance Agency","computers","Chennai",2500000,12,-3,"Procurement of 200 desktop systems, UPS units and peripherals for district offices."],
+ ["Annual Supply of School Uniform Fabric","tender","gov","Dept. of School Education","textile","Coimbatore",4200000,25,-9,"Cotton blend fabric in assorted colours for government school uniforms."],
+ ["Office Furniture for New Administrative Block","rfq","gov","Greater Chennai Corporation","furniture","Chennai",1800000,6,-2,"Workstations, ergonomic chairs and storage cabinets for 150 staff."],
+ ["LED Street Lighting Components","tender","gov","TANGEDCO","electrical","Madurai",9600000,40,-14,"LED luminaires, poles and control gear for municipal street lighting."],
+ ["Diagnostic Equipment Vendor Empanelment","vendor","gov","Directorate of Medical Services","medical","Tiruchirappalli",0,30,-6,"Empanelment of vendors for lab diagnostic equipment and consumables."],
+ ["Warehouse Racking and Shelving","rfq","pvt","Sundaram Logistics Pvt Ltd","manufacturing","Hosur",950000,9,-1,"Heavy-duty pallet racking for a 40,000 sq ft distribution warehouse."],
+ ["Facility Housekeeping Services, 24 months","rfp","pvt","Apex Business Park","services","Bengaluru",3100000,18,-5,"Integrated housekeeping, pest control and waste handling services."],
+ ["Printer Cartridges and Stationery","supplier","pvt","Lakshmi Textiles Ltd","office","Salem",420000,4,-7,"Quarterly supply of toner cartridges, paper and stationery items."],
+ ["Road Widening, NH-48 Sriperumbudur Stretch","tender","gov","National Highways Authority","construction","Kancheepuram",78000000,55,-20,"Four-laning with drainage and service roads over 12 km."],
+ ["Network Switches and Structured Cabling","rfq","pvt","Orion Healthcare Pvt Ltd","computers","Hyderabad",1350000,14,-4,"Layer-3 switches, fibre backbone and cabling for a hospital campus."],
+ ["Surgical Gloves and PPE Supply","supplier","gov","ESI Hospital, Coimbatore","medical","Coimbatore",2200000,21,-11,"Nitrile gloves, masks and gowns, rate contract for 12 months."],
+ ["ERP Implementation Partner Selection","rfp","pvt","Kaveri Engineering Works","services","Chennai",6500000,34,-8,"Selection of an implementation partner for finance and inventory ERP."]
+].map((r,i)=>({id:i+1,title:r[0],type:r[1],source:r[2],org:r[3],category:r[4],location:r[5],value:r[6],deadline:d(r[7]),posted:d(r[8]),desc:r[9]}));
+// --- filters ---
+const opts={
+ type:[["","All types"],...Object.entries(T)],source:[["","All sources"],["gov","Government"],["pvt","Private"]],
+ category:[["","All categories"],...Object.entries(C)],
+ location:[["","All locations"],...[...new Set(DATA.map(x=>x.location))].sort().map(l=>[l.toLowerCase(),l])],
+ value:[["","Any value"],["u10","Under ₹10 lakh"],["10-50","₹10 – 50 lakh"],["50-100","₹50 lakh – 1 crore"],["o100","Above ₹1 crore"]],
+ deadline:[["","Any deadline"],["7","Within 7 days"],["30","Within 30 days"],["90","Within 90 days"]],
+ posted:[["","Any time"],["3","Last 3 days"],["7","Last 7 days"],["30","Last 30 days"]],
+ sort:[["relevance","Relevance"],["newest","Newest"],["deadline","Deadline soon"],["high","Highest value"],["low","Lowest value"]]};
+const labels={search:"Search",type:"Type",source:"Source",category:"Category",location:"Location",value:"Value",deadline:"Deadline",posted:"Posted"};
+const keys=Object.keys(opts).filter(k=>k!=="sort");
+const $=id=>document.getElementById(id);
+for(const k in opts)$(k).innerHTML=opts[k].map(([v,t])=>`<option value="${v}">${t}</option>`).join("");
+const state=()=>{const o={search:$("search").value.trim()};keys.forEach(k=>o[k]=$(k).value);o.sort=$("sort").value;return o};
+function readURL(){const p=new URLSearchParams(location.search);$("search").value=p.get("search")||"";[...keys,"sort"].forEach(k=>{const v=p.get(k);if(v&&opts[k].some(o=>o[0]===v))$(k).value=v})}
+function writeURL(){const s=state(),p=new URLSearchParams();Object.entries(s).forEach(([k,v])=>{if(v&&!(k==="sort"&&v==="relevance"))p.set(k,v)});["error","embed"].forEach(k=>{const v=new URLSearchParams(location.search).get(k);if(v)p.set(k,v)});try{history.replaceState(null,"",p.toString()?"?"+p:location.pathname)}catch(e){}}
+const days=s=>Math.round((new Date(s)-TODAY)/864e5);
+const fmtD=s=>new Date(s).toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
+const inr=n=>n?"₹"+n.toLocaleString("en-IN"):"Not disclosed";
+function apply(list,s){
+ let r=list.filter(o=>{
+  if(s.search){const h=(o.title+o.org+C[o.category]+o.location+o.desc+T[o.type]).toLowerCase();if(!s.search.toLowerCase().split(/\s+/).every(w=>h.includes(w)))return false}
+  if(s.type&&o.type!==s.type)return false;if(s.source&&o.source!==s.source)return false;
+  if(s.category&&o.category!==s.category)return false;if(s.location&&o.location.toLowerCase()!==s.location)return false;
+  const v=o.value/1e5;
+  if(s.value==="u10"&&!(o.value&&v<10))return false;if(s.value==="10-50"&&!(v>=10&&v<50))return false;
+  if(s.value==="50-100"&&!(v>=50&&v<100))return false;if(s.value==="o100"&&!(v>=100))return false;
+  if(s.deadline&&days(o.deadline)>+s.deadline)return false;
+  if(s.posted&&-days(o.posted)>+s.posted)return false;return true});
+ const by={newest:(a,b)=>b.posted.localeCompare(a.posted),deadline:(a,b)=>a.deadline.localeCompare(b.deadline),high:(a,b)=>b.value-a.value,low:(a,b)=>(a.value||1e12)-(b.value||1e12)}[s.sort];
+ if(by)r.sort(by);return r}
+// --- UI ---
+let all=null,saved=new Set();
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function card(o){const dl=days(o.deadline),soon=dl<=7;
+ return `<article class="card"><div class="tags"><span class="tag ${o.source==="gov"?"g":"pr"}">${o.source==="gov"?"Government":"Private"}</span><span class="tag">${T[o.type]}</span></div>
+ <div><h3>${esc(o.title)}</h3><div class="org">${esc(o.org)}</div></div><p class="desc">${esc(o.desc)}</p>
+ <div class="meta"><div><small>Category</small><span>${C[o.category]}</span></div><div><small>Location</small><span>${esc(o.location)}</span></div>
+ <div><small>Estimated value</small><span>${inr(o.value)}</span></div><div><small>Deadline</small><span class="${soon?"soon":""}">${fmtD(o.deadline)}${soon?` (${dl}d left)`:""}</span></div>
+ <div><small>Posted</small><span>${fmtD(o.posted)}</span></div></div>
+ <div class="foot"><button class="btn save" data-save="${o.id}" aria-pressed="${saved.has(o.id)}" aria-label="${saved.has(o.id)?"Unsave":"Save"} ${esc(o.title)}">${saved.has(o.id)?"★ Saved":"☆ Save"}</button><a class="btn p" href="/opportunities/${o.id}">View opportunity</a></div></article>`}
+function stateBox(ic,h,p,btn){return `<div class="state"><div class="ic">${ic}</div><h2>${h}</h2><p>${p}</p>${btn}</div>`}
+function render(){
+ const out=$("out"),s=state();writeURL();
+ const active=[];if(s.search)active.push(["search",`“${s.search}”`]);keys.forEach(k=>{if(s[k]){const t=opts[k].find(o=>o[0]===s[k])[1];active.push([k,t])}});
+ $("chips").innerHTML=active.map(([k,t])=>`<button class="chip" data-chip="${k}" aria-label="Remove filter ${labels[k]}: ${esc(t)}">${labels[k]}: ${esc(t)}<b>×</b></button>`).join("");
+ $("clear").disabled=!active.length;$("clear").style.opacity=active.length?1:.5;
+ if(all===null){$("count").textContent="Loading opportunities…";out.innerHTML=`<div class="cards">${'<div class="sk"></div>'.repeat(4)}</div>`;return}
+ if(all==="error"){$("count").textContent="";out.innerHTML=stateBox("⚠️","We couldn’t load opportunities","Check your connection and try again.",`<button class="btn p" data-retry>Retry</button>`);return}
+ if(!all.length){$("count").textContent="0 opportunities";out.innerHTML=stateBox("📄","No opportunities yet","New government and private listings will appear here as they are published.","");return}
+ const r=apply(all,s);$("count").textContent=`${r.length} ${r.length===1?"opportunity":"opportunities"} found`;
+ out.innerHTML=r.length?`<div class="cards">${r.map(card).join("")}</div>`:stateBox("🔍","No opportunities match your current filters.","Try a broader keyword or remove a filter.",`<button class="btn p" data-clear>Clear filters</button>`)}
+async function load(){all=null;render();try{all=await opportunityService.list()}catch(e){all="error"}render()}
+function clearAll(){$("search").value="";keys.forEach(k=>$(k).value="");render()}
+document.addEventListener("input",e=>{if(e.target.id==="search")render()});
+document.addEventListener("change",e=>{if(e.target.matches("select"))render()});
+document.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)return;
+ if(t.dataset.chip){const k=t.dataset.chip;$(k).value="";render()}
+ else if(t.id==="clear"||"clear"in t.dataset)clearAll();
+ else if("retry"in t.dataset){window.__retried=true;load()}
+ else if(t.dataset.save){const id=+t.dataset.save;saved.has(id)?saved.delete(id):saved.add(id);/* hook: savedOpportunityService.toggle(id) */render()}});
+const side=$("side"),scrim=$("scrim"),menu=$("menu");
+const nav=o=>{side.classList.toggle("open",o);scrim.classList.toggle("open",o);menu.setAttribute("aria-expanded",o)};
+menu.onclick=()=>nav(!side.classList.contains("open"));scrim.onclick=()=>nav(false);
+document.addEventListener("keydown",e=>{if(e.key==="Escape")nav(false)});
+readURL();load();
+</script>
+</body>
+</html>

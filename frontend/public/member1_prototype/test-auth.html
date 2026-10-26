@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Auth tests · TenderBridge Member 1</title>
+  <style>
+    :root { --ok:#15803D; --bad:#DC2626; --navy:#12304A; }
+    body { margin: 0; font: 14px/1.6 system-ui,sans-serif; padding: 20px; background: #f5f7fa; }
+    h1 { font-size: 22px; color: var(--navy); margin: 0 0 4px; }
+    p.lead { color: #6b7280; margin: 0 0 20px; }
+    section { background: #fff; border: 1px solid #dde3ea; border-radius: 10px;
+              padding: 16px 20px; margin-bottom: 14px; }
+    h2 { font-size: 14px; font-weight: 700; color: var(--navy); margin: 0 0 10px; }
+    label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+    input { width: 100%; padding: 8px 10px; border: 1px solid #dde3ea; border-radius: 6px;
+            font: inherit; box-sizing: border-box; margin-bottom: 8px; }
+    button { height: 36px; padding: 0 14px; border-radius: 6px; border: 1px solid #dde3ea;
+             background: var(--navy); color: #fff; font: 600 13px/1 system-ui,sans-serif;
+             cursor: pointer; }
+    button.sec { background: #fff; color: var(--navy); }
+    .result { margin-top: 10px; padding: 8px 12px; border-radius: 6px;
+              font-size: 12px; white-space: pre-wrap; word-break: break-all; }
+    .result.ok  { background: #e8f5ec; color: var(--ok); border: 1px solid #b7dfbe; }
+    .result.bad { background: #fdecec; color: var(--bad); border: 1px solid #f5c6cb; }
+    .result.info{ background: #eaf1f7; color: var(--navy); border: 1px solid #c2d9ee; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .notice { background: #fdf1e1; border: 1px solid #f5d99e; border-radius: 8px;
+              padding: 10px 14px; font-size: 12px; color: #92400e; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <h1>TenderBridge – Member 1 Auth Tests</h1>
+  <p class="lead">Manual test runner for Supabase auth. Fill in credentials below. All operations call Supabase directly.</p>
+
+  <div class="notice">
+    ⚠️ These tests call your <strong>real</strong> Supabase project.
+    Use a dedicated test email address you control (e.g. <code>tb-test-1@yourdomain.com</code>).
+    Supabase sends real confirmation emails when email confirmation is enabled.
+  </div>
+
+  <!-- ── 0. Config check ──────────────────────────────────────────── -->
+  <section>
+    <h2>0 · Configuration check</h2>
+    <p style="font-size:12px;color:#6b7280;margin:0 0 8px">
+      Verifies that <code>assets/supabase.js</code> has been filled in and the Supabase client is reachable.
+    </p>
+    <button onclick="runConfigCheck()">Check config</button>
+    <div id="r0" class="result info" style="display:none"></div>
+  </section>
+
+  <!-- ── 1. Sign up ────────────────────────────────────────────────── -->
+  <section>
+    <h2>1 · Sign up</h2>
+    <label>Email <input id="su-email" type="email" placeholder="tb-test@example.com"></label>
+    <label>Password (8+ chars) <input id="su-pw" type="password" placeholder="TestPass123!"></label>
+    <label>Role
+      <select id="su-role" style="width:100%;padding:8px;border:1px solid #dde3ea;border-radius:6px;font:inherit;margin-bottom:8px">
+        <option value="b">Business (b)</option>
+        <option value="o">Organization (o)</option>
+      </select>
+    </label>
+    <div class="row">
+      <button onclick="runSignUp()">Sign up</button>
+    </div>
+    <div id="r1" class="result" style="display:none"></div>
+  </section>
+
+  <!-- ── 2. Sign in ────────────────────────────────────────────────── -->
+  <section>
+    <h2>2 · Sign in</h2>
+    <label>Email <input id="si-email" type="email" placeholder="tb-test@example.com"></label>
+    <label>Password <input id="si-pw" type="password" placeholder="TestPass123!"></label>
+    <div class="row">
+      <button onclick="runSignIn()">Sign in</button>
+    </div>
+    <div id="r2" class="result" style="display:none"></div>
+  </section>
+
+  <!-- ── 3. Session restore ─────────────────────────────────────────── -->
+  <section>
+    <h2>3 · Session restore</h2>
+    <p style="font-size:12px;color:#6b7280;margin:0 0 8px">
+      Checks whether the session stored by the previous sign-in can be retrieved.
+      Reload the page first to simulate a fresh load, then click.
+    </p>
+    <div class="row">
+      <button onclick="runSessionCheck()">Check session</button>
+      <button class="sec" onclick="location.reload()">Reload page</button>
+    </div>
+    <div id="r3" class="result" style="display:none"></div>
+  </section>
+
+  <!-- ── 4. Password reset ──────────────────────────────────────────── -->
+  <section>
+    <h2>4 · Password reset email</h2>
+    <label>Email <input id="pr-email" type="email" placeholder="tb-test@example.com"></label>
+    <div class="row">
+      <button onclick="runReset()">Send reset link</button>
+    </div>
+    <div id="r4" class="result" style="display:none"></div>
+  </section>
+
+  <!-- ── 5. Password change ─────────────────────────────────────────── -->
+  <section>
+    <h2>5 · Change password (requires active session)</h2>
+    <label>New password (8+ chars) <input id="cp-pw" type="password" placeholder="NewPass456!"></label>
+    <div class="row">
+      <button onclick="runChangePassword()">Change password</button>
+    </div>
+    <div id="r5" class="result" style="display:none"></div>
+  </section>
+
+  <!-- ── 6. Sign out ───────────────────────────────────────────────── -->
+  <section>
+    <h2>6 · Sign out</h2>
+    <div class="row">
+      <button onclick="runSignOut()">Sign out</button>
+    </div>
+    <div id="r6" class="result" style="display:none"></div>
+  </section>
+
+  <!-- ── 7. Error handling ──────────────────────────────────────────── -->
+  <section>
+    <h2>7 · Error handling (wrong credentials)</h2>
+    <p style="font-size:12px;color:#6b7280;margin:0 0 8px">
+      Attempts to sign in with a known-wrong password.
+      Expects a friendly error message, not a raw Supabase error object.
+    </p>
+    <div class="row">
+      <button onclick="runBadCreds()">Test bad credentials</button>
+    </div>
+    <div id="r7" class="result" style="display:none"></div>
+  </section>
+
+  <!-- ── 8. Protected route guard ──────────────────────────────────── -->
+  <section>
+    <h2>8 · Protected route guard</h2>
+    <p style="font-size:12px;color:#6b7280;margin:0 0 8px">
+      Opens <code>business-dashboard.html</code> in a new tab while signed out.
+      Expect the page to redirect to <code>#/login</code>.
+    </p>
+    <div class="row">
+      <button onclick="runRouteGuard()">Test route guard</button>
+    </div>
+    <div id="r8" class="result" style="display:none"></div>
+  </section>
+
+  <!-- load Supabase client first, then the project config -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="assets/supabase.js"></script>
+  <script>
+    // ── helpers ────────────────────────────────────────────────────────────────
+    function show(id, cls, text) {
+      const el = document.getElementById(id);
+      el.className = 'result ' + cls;
+      el.textContent = text;
+      el.style.display = 'block';
+    }
+    function pass(id, text) { show(id, 'ok', '✅ PASS: ' + text); }
+    function fail(id, text) { show(id, 'bad', '❌ FAIL: ' + text); }
+    function info(id, text) { show(id, 'info', 'ℹ️  ' + text); }
+
+    const sb = () => window.tbSupabase;
+
+    // Friendly error mapper (mirrors tenderbridge.js)
+    function friendlyAuthError(err) {
+      if (!err) return 'An unexpected error occurred.';
+      const msg = (err.message || '').toLowerCase();
+      if (msg.includes('invalid login credentials') || msg.includes('invalid email or password'))
+        return 'Incorrect email or password. Please try again.';
+      if (msg.includes('email not confirmed'))
+        return 'Please confirm your email address before signing in. Check your inbox.';
+      if (msg.includes('user already registered') || msg.includes('already been registered'))
+        return 'An account with this email already exists. Try logging in instead.';
+      if (msg.includes('password should be at least') || msg.includes('weak password'))
+        return 'Your password is too short. Use at least 8 characters.';
+      if (msg.includes('rate limit') || msg.includes('too many requests'))
+        return 'Too many attempts. Please wait a minute and try again.';
+      return err.message || 'Something went wrong. Please try again.';
+    }
+
+    // ── 0. Config ──────────────────────────────────────────────────────────────
+    async function runConfigCheck() {
+      try {
+        if (!sb()) { fail('r0', 'Supabase is not configured yet.\nwindow.tbSupabase is null because the placeholder values in assets/supabase.js have not been replaced.\n\nFix: open member1/assets/supabase.js and set SUPABASE_URL and SUPABASE_ANON_KEY to your real project values (Supabase dashboard → Project Settings → API).'); return; }
+        const url = sb().supabaseUrl || '(not exposed)';
+        if (url.includes('YOUR_SUPABASE')) { fail('r0', 'Placeholder URL detected. Fill in SUPABASE_URL in assets/supabase.js.'); return; }
+        // Ping the health endpoint
+        const res = await fetch(url + '/rest/v1/', { headers: { apikey: sb().supabaseKey || '' } });
+        pass('r0', `Supabase client initialised.\nProject URL: ${url}\nHTTP status: ${res.status} (401 is expected without auth – client is reachable)`);
+      } catch (e) {
+        fail('r0', 'Config check threw: ' + e.message);
+      }
+    }
+
+    // ── 1. Sign up ─────────────────────────────────────────────────────────────
+    async function runSignUp() {
+      const email = document.getElementById('su-email').value.trim();
+      const pw    = document.getElementById('su-pw').value;
+      const role  = document.getElementById('su-role').value;
+      if (!email || !pw) { fail('r1', 'Fill in email and password.'); return; }
+      info('r1', 'Calling supabase.auth.signUp…');
+      const { data, error } = await sb().auth.signUp({
+        email, password: pw, options: { data: { role } }
+      });
+      if (error) { fail('r1', 'signUp failed.\nRaw: ' + error.message + '\nFriendly: ' + friendlyAuthError(error)); return; }
+      const hasSession = !!data.session;
+      pass('r1',
+        `signUp succeeded.\nUser ID: ${data.user?.id}\nEmail confirmed: ${data.user?.confirmed_at ? 'yes' : 'no (confirmation email sent)'}\nImmediate session: ${hasSession ? 'yes (email confirmation is disabled)' : 'no (check inbox)'}\nRole in user_metadata: ${data.user?.user_metadata?.role}`
+      );
+    }
+
+    // ── 2. Sign in ─────────────────────────────────────────────────────────────
+    async function runSignIn() {
+      const email = document.getElementById('si-email').value.trim();
+      const pw    = document.getElementById('si-pw').value;
+      if (!email || !pw) { fail('r2', 'Fill in email and password.'); return; }
+      info('r2', 'Calling supabase.auth.signInWithPassword…');
+      const { data, error } = await sb().auth.signInWithPassword({ email, password: pw });
+      if (error) { fail('r2', 'signIn failed.\nRaw: ' + error.message + '\nFriendly: ' + friendlyAuthError(error)); return; }
+      pass('r2',
+        `signIn succeeded.\nUser ID: ${data.user?.id}\nEmail: ${data.user?.email}\nRole in user_metadata: ${data.user?.user_metadata?.role}\nRole in app_metadata: ${data.user?.app_metadata?.role || '(not set – see notes)'}\nAccess token: ${data.session?.access_token?.slice(0,40)}…`
+      );
+    }
+
+    // ── 3. Session restore ─────────────────────────────────────────────────────
+    async function runSessionCheck() {
+      info('r3', 'Calling supabase.auth.getSession…');
+      const { data, error } = await sb().auth.getSession();
+      if (error) { fail('r3', 'getSession error: ' + error.message); return; }
+      if (!data.session) { info('r3', 'No active session found. Sign in first (test 2), then reload the page and run this test.'); return; }
+      pass('r3',
+        `Session restored from localStorage.\nUser: ${data.session.user?.email}\nExpires: ${new Date(data.session.expires_at * 1000).toLocaleString()}\nAccess token: ${data.session.access_token?.slice(0,40)}…`
+      );
+    }
+
+    // ── 4. Password reset ──────────────────────────────────────────────────────
+    async function runReset() {
+      const email = document.getElementById('pr-email').value.trim();
+      if (!email) { fail('r4', 'Enter an email address.'); return; }
+      info('r4', 'Calling supabase.auth.resetPasswordForEmail…');
+      const { error } = await sb().auth.resetPasswordForEmail(email, {
+        redirectTo: location.origin + '/forgot-password.html',
+      });
+      if (error) { fail('r4', 'resetPasswordForEmail failed.\nRaw: ' + error.message + '\nFriendly: ' + friendlyAuthError(error)); return; }
+      pass('r4', 'Reset email sent (or silently skipped if account not found – this is intentional).\nCheck inbox for a link.');
+    }
+
+    // ── 5. Password change ─────────────────────────────────────────────────────
+    async function runChangePassword() {
+      const pw = document.getElementById('cp-pw').value;
+      if (!pw) { fail('r5', 'Enter a new password.'); return; }
+      if (pw.length < 8) { fail('r5', 'Password must be at least 8 characters.'); return; }
+      info('r5', 'Calling supabase.auth.updateUser…');
+      const { data, error } = await sb().auth.updateUser({ password: pw });
+      if (error) { fail('r5', 'updateUser failed.\nRaw: ' + error.message + '\nFriendly: ' + friendlyAuthError(error)); return; }
+      pass('r5', 'Password changed successfully.\nUser: ' + data.user?.email);
+    }
+
+    // ── 6. Sign out ────────────────────────────────────────────────────────────
+    async function runSignOut() {
+      info('r6', 'Calling supabase.auth.signOut…');
+      const { error } = await sb().auth.signOut();
+      if (error) { fail('r6', 'signOut failed: ' + error.message); return; }
+      const { data } = await sb().auth.getSession();
+      if (data.session) { fail('r6', 'signOut reported success but a session is still active.'); return; }
+      pass('r6', 'Signed out. getSession() returned null – localStorage cleared.');
+    }
+
+    // ── 7. Bad credentials ─────────────────────────────────────────────────────
+    async function runBadCreds() {
+      info('r7', 'Attempting sign-in with wrong password…');
+      const { error } = await sb().auth.signInWithPassword({
+        email: 'nobody-' + Date.now() + '@example.invalid',
+        password: 'WrongPassword999!',
+      });
+      if (!error) { fail('r7', 'Expected an error but got a successful sign-in. This should not happen.'); return; }
+      const friendly = friendlyAuthError(error);
+      const isGeneric = friendly !== error.message;
+      pass('r7',
+        `Supabase returned an error as expected.\nRaw error: ${error.message}\nFriendly message: ${friendly}\nFriendlyAuthError mapped: ${isGeneric ? 'yes' : 'no (message passed through as-is)'}`
+      );
+    }
+
+    // ── 8. Route guard ─────────────────────────────────────────────────────────
+    function runRouteGuard() {
+      // Sign out first so the guard fires.
+      sb().auth.signOut().then(() => {
+        const win = window.open('business-dashboard.html', '_blank');
+        info('r8',
+          'Opened business-dashboard.html in a new tab while signed out.\n' +
+          'Expected: the page loads and immediately redirects to #/login.\n' +
+          'Verify this manually in the new tab.\n\n' +
+          '(A programmatic check is not possible cross-tab; visual inspection required.)'
+        );
+      });
+    }
+  </script>
+</body>
+</html>

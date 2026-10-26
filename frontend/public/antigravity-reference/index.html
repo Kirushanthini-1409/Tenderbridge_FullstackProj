@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f7f9" />
+  <title>TenderBridge — Product Reference Prototype</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="prototype-ribbon"><span class="pulse"></span> INTERACTIVE PRODUCT REFERENCE <span class="ribbon-note">Fictional sample data · Frontend only · Not connected to the application database</span></div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#dashboard" aria-label="TenderBridge home"><span class="brand-mark">T</span><span><strong>TenderBridge</strong><small>Procurement workspace</small></span></a>
+      <div class="workspace-switch"><span class="tiny-label">WORKSPACE</span><select id="workspace"><option value="business">Business workspace</option><option value="organization">Organization workspace</option><option value="admin">Admin workspace</option></select></div>
+      <nav id="navigation" aria-label="Main navigation"></nav>
+      <div class="sidebar-bottom"><div class="help-card"><span class="help-icon">?</span><div><strong>Need a hand?</strong><small>Visit the help centre</small></div><span class="arrow">↗</span></div><div class="user-card"><div class="avatar">AK</div><div class="user-copy"><strong id="user-name">Aarav Kumar</strong><small id="user-role">Business account · Verified</small></div><button class="icon-button" aria-label="Account options">···</button></div></div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar"><div class="mobile-brand"><span class="brand-mark">T</span><strong>TenderBridge</strong></div><div class="breadcrumbs" id="breadcrumbs">Workspace <span>/</span> Overview</div><div class="topbar-actions"><button class="icon-button notification-button" aria-label="Notifications" title="Notifications">♧<i></i></button><button class="top-avatar" title="Aarav Kumar">AK</button></div></header>
+      <section class="page-wrap"><div class="demo-alert"><span class="alert-dot"></span><span><strong>Reference prototype:</strong> actions update this screen only; no real tender, account, or application is created.</span><button id="dismiss-alert" aria-label="Dismiss">×</button></div><div id="page-content"></div><footer class="page-footer"><span>© 2026 TenderBridge</span><span>Private procurement workspace <b>·</b> Prototype v1</span></footer></section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <div class="modal-backdrop" id="modal" aria-hidden="true"><section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" id="modal-close" aria-label="Close">×</button><div id="modal-content"></div></section></div>
+  <script src="./app.js"></script>
+</body>
+</html>
